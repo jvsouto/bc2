@@ -1,23 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+
+import Button from 'react-bootstrap/Button';
+
 import './App.css';
+
+let value = "";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Button onClick={() => {console.log( "click")}} >Hello</Button>
+
+        <h2> { value }</h2>
+        <form>
+          <label>
+            Name:
+            <input value={ value } onChange={ (e) => value = e}/>
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
       </header>
     </div>
   );
