@@ -1,28 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react'
 
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
+
+import { Provider } from 'react-redux'
+import store from './store';
 
 import './App.css';
 
-let value = "";
+import Nav from './components/Nav'
+import Posts from './components/Posts'
+import PostForm from './components/PostForm';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Button onClick={() => {console.log( "click")}} >Hello</Button>
+class App extends Component {
 
-        <h2> { value }</h2>
-        <form>
-          <label>
-            Name:
-            <input value={ value } onChange={ (e) => value = e}/>
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-      </header>
-    </div>
-  );
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      posts: []
+    }
+  }
+
+
+  render() {
+    return (
+      <Provider store={store}>
+        <div className="App">
+          <header className="App-header">
+            <h1>Home puge</h1>
+            <Nav />
+          </header>
+          <PostForm />
+          <Posts />
+        </div>
+      </Provider>
+    );
+  }
 }
 
 export default App;
