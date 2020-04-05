@@ -1,41 +1,57 @@
-import React, { Component } from 'react'
+import React, { useState } from "react";
+
+import "./styles.css";
+import { renderTime } from "./utils";
+import CounterA from "./components/CounterA";
+import CounterB from "./components/CounterB";
 
 // import Button from 'react-bootstrap/Button';
-
-import { Provider } from 'react-redux'
-import store from './store';
 
 import './App.css';
 
 import Nav from './components/Nav'
-import Posts from './components/Posts'
-import PostForm from './components/PostForm';
 
-class App extends Component {
+function App() {
+  const [children, setChilds] = useState([]);
+  const addCounterA = () => {
+    const counter = <CounterA />;
+    const newChildren = [...children, counter];
+    setChilds(newChildren);
+  };
+  const addCounterB = () => {
+    console.log("klik")
+    const counter = <CounterB />;
+    const newChildren = [...children, counter];
+    console.log(newChildren)
+    setChilds(newChildren);
+  };
 
-  constructor(props) {
-    super(props)
+  const addManyCounterB = count => {
+    
+    // const newChildren = [...children];
+    // for (let index = 0; index < count; index++) {
+    //   newChildren.push(<CounterB />);
+    // }
+    // setChilds(newChildren);
+  };
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>Home puge</h1>
+        <Nav />
+      </header>
 
-    this.state = {
-      posts: []
-    }
-  }
+      <h3>{renderTime()}</h3>
+      <button onClick={addCounterA}>Add CounterA component</button>
+      <button onClick={addCounterB}>Add CounterB component</button>
+      <button onClick={() => addManyCounterB(10000)}>
+        Add 10 000 CounterB components
+      </button>
+      <div className="container">{children}</div>
 
-
-  render() {
-    return (
-      <Provider store={store}>
-        <div className="App">
-          <header className="App-header">
-            <h1>Home puge</h1>
-            <Nav />
-          </header>
-          <PostForm />
-          <Posts />
-        </div>
-      </Provider>
-    );
-  }
+    </div>
+  );
+  
 }
 
 export default App;
